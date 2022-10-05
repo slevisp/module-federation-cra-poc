@@ -3,10 +3,9 @@ import './App.css'
 import { Button, Input } from 'commonComponents/core'
 
 function App () {
-  const inputRef = useRef(undefined)
+  const inputRef = useRef(null)
   const handleBtnClicked = () => {
     const { value } = inputRef.current
-    console.log(value)
     const customEvent = new CustomEvent('POST_MESSAGE', {
       detail: {
         value
