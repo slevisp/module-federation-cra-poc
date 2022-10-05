@@ -1,18 +1,15 @@
 import { useRef } from 'react'
 import './App.css'
 import { Button, Input } from 'commonComponents/core'
+import Messager from './_utils/Messager'
 
 function App () {
-  const inputRef = useRef(undefined)
+  const inputRef = useRef(null)
   const handleBtnClicked = () => {
     const { value } = inputRef.current
-    console.log(value)
-    const customEvent = new CustomEvent('POST_MESSAGE', {
-      detail: {
-        value
-      }
-    })
-    window.dispatchEvent(customEvent)
+
+    const messager = new Messager(value)
+    messager.dispatch()
   }
   return (
     <div className='App'>
