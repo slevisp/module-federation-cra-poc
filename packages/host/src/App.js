@@ -2,18 +2,12 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import RemoteApp from 'remote/App'
 import { WhiteBoard } from 'commonComponents/core'
+import Receiver from './_utils/Receiver'
 
 function App () {
   const [whiteBoardData, setWhiteBoardData] = useState([])
   useEffect(() => {
-    let data = []
-    const abortController = window.addEventListener('POST_MESSAGE', event => {
-      const value = event?.detail?.value
-      if (value) {
-        data = [value, ...data]
-        setWhiteBoardData(data)
-      }
-    })
+    const abortController = Receiver.listen(setWhiteBoardData)
 
     return () => {
       if (abortController) abortController.abort()
